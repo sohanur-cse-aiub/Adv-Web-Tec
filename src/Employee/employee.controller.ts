@@ -11,7 +11,7 @@ export class EmployeeController {
   }
   constructor(private readonly employeeService: EmployeeService) {}
 
-  @Get()
+  @Get('hello')
   getHello(): string {
     return this.employeeService.getHello();
   }
@@ -19,16 +19,16 @@ export class EmployeeController {
   getPhotoById(@Param('id', ParseIntPipe) id: number): string {
     return this.employeeService.getPhotoById(id);
   }
-   @Post()
+  @Post()
   @UsePipes(new ValidationPipe()) // Validates the data based on the DTO
-  createEmployee(@Body() EmployeeData: CreateEmployeeDto) {
-    return this.employeeService.addEmployee(EmployeeData);
+ createEmployee(@Body() EmployeeData: CreateEmployeeDto) {
+   return this.employeeService.addEmployee(EmployeeData);
   }
-  @Get()
+  @Get( 'getAll')
   getAllEmployees(){
     return[{name:'Riddho',email:'riddho@aiub',Password:'Riddho123', Gender: 'male', Phone: 1725676790}];
   }
-  @Post()
+  @Post('add')
   CreateEmployee(@Body() createEmployeeDto: CreateEmployeeDto) {
     return{message: 'Employee created successfully', data: createEmployeeDto};
   
@@ -42,7 +42,7 @@ export class EmployeeController {
  cb(new MulterError('LIMIT_UNEXPECTED_FILE', 'image'), false);
  }
  },
- limits: { fileSize: 30000 },
+ limits: { fileSize: 2 * 1024 * 1024 }, 
  storage:diskStorage({
  destination: './uploads',
  filename: function (req, file, cb) {
