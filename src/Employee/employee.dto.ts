@@ -1,4 +1,31 @@
-import { IsString, IsEmail, IsNumber, MinLength, Matches, IsIn, IsNotEmpty } from 'class-validator';
+import { IsBoolean, IsOptional, IsString, IsNumber } from 'class-validator';
+
+export class CreateEmployeeDto {
+  @IsOptional()
+  @IsString()
+  fullName?: string;
+
+  @IsNumber()
+  phone: number;
+
+  @IsOptional()
+  @IsBoolean()
+  isActive?: boolean;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*import { IsString, IsEmail, IsNumber, MinLength,IsOptional, Matches, IsIn, IsNotEmpty } from 'class-validator';
 
 export class CreateEmployeeDto {
   @IsString()
@@ -18,6 +45,10 @@ export class CreateEmployeeDto {
   @IsIn(['male', 'female'], { message: 'Gender must be either male or female' })
   Gender: string;
 
-  @IsNumber({}, { message: 'Phone must be a number' })
-  Phone: number;
-}
+   @IsOptional()
+    @IsString()
+    fullName: string;
+  
+    @IsNumber()
+    phone: number;
+}*/

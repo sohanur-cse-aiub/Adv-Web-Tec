@@ -10,12 +10,28 @@ import { EmployeeController } from './Employee/employee.controller';
 import { SellerModule } from './Seller/seller.module';  
 import { SellerService } from './Seller/seller.service';
 import { SellerController } from './Seller/seller.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 
 
 @Module({
-  imports: [AdminModule,EmployeeModule, SellerModule],
-  controllers: [AppController, AdminController, EmployeeController, SellerController],
-  providers: [AppService, AdminService, EmployeeService, SellerService],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'Riddho1234',
+      database: 'Employee_db',
+      autoLoadEntities: true,
+      synchronize: true,
+    }),
+    EmployeeModule,AdminModule,
+    SellerModule,
+  ],
+ 
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
 
